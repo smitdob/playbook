@@ -1,0 +1,21 @@
+# Model Fallback Policy
+
+Defines which model each agent uses and what happens when the primary model fails.
+
+## Agent Model Assignment
+
+| Agent              | Primary Model          | Fallback Model      | Temperature |
+|--------------------|------------------------|---------------------|-------------|
+| RequirementAgent   | llama-3.3-70b-versatile | gpt-4.1            | 0.2         |
+| ArchitectureAgent  | llama-3.3-70b-versatile | gpt-4.1            | 0.25        |
+| DeveloperAgent     | llama-3.3-70b-versatile | codestral-latest   | 0.3         |
+| QAAgent            | llama-3.3-70b-versatile | gpt-4.1-mini       | 0.2         |
+| DevOpsAgent        | llama-3.3-70b-versatile | gpt-4.1            | 0.2         |
+| OrchestratorAgent  | llama-3.3-70b-versatile | gpt-4.1            | 0.1         |
+
+## Fallback Rules
+1. If primary model returns an error — automatically retry with fallback model
+2. Maximum 2 retries on primary before switching to fallback
+3. Maximum 1 retry on fallback before escalating to SelfHealingAgent
+4. Always log which model was used in the agent output
+5. Never silently fail — always surface the model used and retry count

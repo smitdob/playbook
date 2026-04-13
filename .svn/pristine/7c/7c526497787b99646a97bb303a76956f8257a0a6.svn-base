@@ -1,0 +1,250 @@
+# AI Agent Playbook Repository
+
+This repository contains standardized configurations, rules, and structured `skills.md` definitions for all AI agents used in the AI-driven SDLC system.
+
+---
+
+## 🚀 Objective
+
+To build a **scalable, consistent, and production-ready multi-agent system** where each agent:
+
+* Has a clearly defined role
+* Follows a strict structure
+* Communicates seamlessly with other agents
+* Produces predictable and machine-readable outputs
+
+---
+
+## 📂 Repository Structure
+
+```
+├── playbooks/
+│   ├── agents/
+│   │   ├── ArchitectureAgent/
+│   │   │   └── skills.md
+│   │   ├── DeveloperAgent/
+│   │   │   └── skills.md
+│   │   ├── DevOpsAgent/
+│   │   │   └── skills.md
+│   │   ├── QAAgent/
+│   │   │   └── skills.md
+│   │   └── RequirementAgent/
+│   │       └── skills.md
+│   ├── communication/
+│   │   └── handoff-protocol.md
+│   └── global/
+│       └── global_rules.md
+├── README.md
+```
+
+---
+
+## 🧠 Architecture Overview
+
+This system follows a **pipeline-based SDLC flow**:
+
+```
+RequirementAgent → ArchitectureAgent → DeveloperAgent → DevOpsAgent → QAAgent
+```
+
+Each agent:
+
+* Takes structured input
+* Processes it with defined logic
+* Produces structured output for the next agent
+
+---
+
+## 📁 Agent Design Principle
+
+Each agent is designed using a **Single-File Configuration Approach**:
+
+* Every agent contains only one file → `skills.md`
+* This file includes:
+
+  * Prompt (System Message)
+  * Skills
+  * Model configuration
+  * Input/Output contract
+  * Failure handling
+
+### ✅ Why Single File?
+
+* Simple and easy to manage
+* No multi-file dependency issues
+* Optimized for LLM context usage
+* Easily extendable in future (multi-file support can be added later)
+
+---
+
+## 🗂️ `skills.md` Standard (MANDATORY)
+
+Every agent **must strictly follow** this structure:
+
+1. Agent Name
+2. System Message
+3. Skill Description
+4. Model Configuration
+5. Inputs
+6. Outputs
+7. Failure / Fallback Behavior
+
+---
+
+## 🧾 Standard `skills.md` Format
+
+```md
+## Agent Name:
+ExampleAgent
+
+## System Message:
+Act as ExampleAgent. Define behavior, responsibilities, rules, and output expectations.
+
+## Skill Description:
+Short description of specialization.
+
+## Model Configuration:
+- **Model**: gpt-4.1
+- **Temperature**: 0.2
+- **Max Tokens**: 1200
+
+## Inputs:
+- **input_name**: Description of input
+
+## Outputs:
+- **output_name**: Description of output
+
+## Failure / Fallback Behavior:
+
+- If requirements are unclear:
+  → Ask clarification OR proceed with assumptions
+
+- If inputs are missing:
+  → Highlight and continue with partial output
+
+- If context is insufficient:
+  → Provide best-effort with assumptions
+
+- If conflicting instructions are present:
+  → Document conflict and proceed safely
+
+- Never:
+  → Hallucinate data
+  → Produce invalid output
+  → Assume without declaration
+```
+
+---
+
+## ⚠️ Important Rules
+
+### 1. Formatting Rules
+
+* Use **Markdown format only**
+* ❌ Do NOT use YAML-style (`name: value`)
+* ✅ Use: `- **key**: value`
+
+---
+
+### 2. Naming Convention
+
+* Use **PascalCase** for:
+
+  * Agent folders
+  * Agent names
+
+Example:
+
+* ✅ `RequirementAgent`
+* ❌ `requirement-agent`, `requirement_agent`
+
+---
+
+### 3. Model Configuration Rules
+
+* Always use explicit model names
+
+  * ✅ `gpt-4.1`
+  * ❌ `gpt-4.1 / equivalent`
+
+---
+
+### 4. Failure Handling Rules
+
+* Agents must **never block the pipeline**
+* Always:
+
+  * Continue with assumptions OR
+  * Provide partial output
+* Clearly mark:
+
+  * Assumptions
+  * Missing inputs
+  * Confidence level
+
+---
+
+## 🔗 Agent Communication
+
+Located in:
+
+```
+playbooks/communication/handoff-protocol.md
+```
+
+Defines:
+
+* Input/Output contracts between agents
+* Data flow standards
+* Handoff structure
+
+---
+
+## 🌍 Global Rules
+
+Located in:
+
+```
+playbooks/global/global_rules.md
+```
+
+Reserved for:
+
+* Security policies
+* Token usage rules
+* Model constraints
+* Organization-wide standards
+
+(Currently minimal – will evolve over time)
+
+---
+
+## 📌 Current Agents
+
+* RequirementAgent → Requirement processing
+* ArchitectureAgent → System design
+* DeveloperAgent → Code generation
+* DevOpsAgent → Deployment & CI/CD
+* QAAgent → Testing & validation
+
+---
+
+## 🔮 Future Enhancements
+
+* Multi-file agent architecture:
+
+  * `skills.md`
+  * `validation.md`
+  * `prompt.md`
+* Memory-based skill injection
+* JSON schema-based outputs
+* Automated agent orchestration
+
+---
+
+## 👥 Playbook Team
+
+* **Lead:** Bhavisha
+* **Members:** Ashish Kakadiya, Smit Dobariya
+
+---

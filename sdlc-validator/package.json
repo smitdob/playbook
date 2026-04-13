@@ -1,0 +1,85 @@
+{
+  "name": "sdlc-playbook-validator",
+  "displayName": "AI-SDLC Playbook Validator",
+  "description": "Validates agent files, folder naming, file presence, and provides AI-powered agent creation assistance",
+  "version": "2.0.0",
+  "publisher": "ai-sdlc-team",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Linters", "Other"],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sdlcValidator.validateFile",
+        "title": "AI-SDLC: Validate This File"
+      },
+      {
+        "command": "sdlcValidator.validateAll",
+        "title": "AI-SDLC: Validate All Agent Files"
+      },
+      {
+        "command": "sdlcValidator.validateFolder",
+        "title": "AI-SDLC: Validate This Agent Folder"
+      },
+      {
+        "command": "sdlcValidator.aiAssist",
+        "title": "AI-SDLC: AI Assistant — Help Me Write This File"
+      },
+      {
+        "command": "sdlcValidator.setApiKey",
+        "title": "AI-SDLC: Set OpenRouter API Key"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "sdlcValidator.validateFile",
+          "when": "resourceFilename == Skills.md || resourceFilename == Validation.md",
+          "group": "sdlc@1"
+        },
+        {
+          "command": "sdlcValidator.validateFolder",
+          "when": "explorerResourceIsFolder",
+          "group": "sdlc@2"
+        },
+        {
+          "command": "sdlcValidator.aiAssist",
+          "when": "resourceFilename == Skills.md || resourceFilename == Validation.md",
+          "group": "sdlc@3"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "sdlcValidator.validateFile",
+          "when": "resourceFilename == Skills.md || resourceFilename == Validation.md",
+          "group": "sdlc@1"
+        },
+        {
+          "command": "sdlcValidator.aiAssist",
+          "when": "resourceFilename == Skills.md || resourceFilename == Validation.md",
+          "group": "sdlc@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI-SDLC Validator",
+      "properties": {
+        "sdlcValidator.openrouterApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your OpenRouter API key for AI Assistant feature"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
